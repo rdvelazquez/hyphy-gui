@@ -3,6 +3,7 @@ const fs = require('fs');
 const hyphyVision = require('hyphy-vision'); 
 const BSREL = hyphyVision.absrel.BSREL;
 const RELAX = hyphyVision.relax.RELAX;
+const BUSTED = hyphyVision.busted.BUSTED;
 
 
 class Results extends Component {
@@ -30,6 +31,7 @@ class Results extends Component {
       <div>
         {method === 'absrel' ? <BSREL data={self.state.jsonData}/> : null}
         {method === 'relax' ? <RELAX data={self.state.jsonData}/> : null}
+        {method === 'busted' ? <BUSTED data={self.state.jsonData}/> : null}
       </div>
     );
   }

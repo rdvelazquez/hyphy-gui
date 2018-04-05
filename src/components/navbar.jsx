@@ -40,6 +40,7 @@ class HyPhyGUINavBar extends Component {
               </a>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                 <a className="dropdown-item" href="#" onClick={() => this.openNewJobSubmittalPage('absrel')} >aBSREL</a>
+                <a className="dropdown-item" href="#" onClick={() => this.openNewJobSubmittalPage('busted')} >BUSTED</a>
                 <a className="dropdown-item" href="#" onClick={() => this.openNewJobSubmittalPage('relax')} >RELAX</a>
                 <a className="dropdown-item" href="#">Other Methods to go Here</a>
                 <div className="dropdown-divider"></div>

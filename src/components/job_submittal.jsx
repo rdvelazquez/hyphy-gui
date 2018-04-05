@@ -37,6 +37,7 @@ class JobSubmittal extends Component {
     const self = this;
     const methodNameandDescription = {
       absrel: {name: 'aBSREL', description: 'An adaptive branch-site REL test for episodic diversification'},
+      busted: {name: 'BUSTED', description: 'Branch-site Unrestricted Statistical Test for Episodic Diversification'},
       relax: {name: 'RELAX', description: 'Detect relaxed selection in a codon-based phylogenetic framework'}
     }
 
