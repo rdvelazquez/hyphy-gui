@@ -99,9 +99,14 @@ function runAnalysisScript(jobInfo) {
   let process = null;
   if (jobInfo.method === 'relax') {
     process = spawn('bash', [scriptPath, hyphyDirectory, jobInfo.msaPath, jobInfo.geneticCode, jobInfo.analysisType]);
+  } else if (jobInfo.method === 'fel') {
+    process = spawn('bash', [scriptPath, hyphyDirectory, jobInfo.msaPath, jobInfo.geneticCode, jobInfo.synRateVariation]);
+  } else if (jobInfo.method === 'gard') {
+    process = spawn('bash', [scriptPath, hyphyDirectory, jobInfo.msaPath, jobInfo.geneticCode, jobInfo.siteRateVariation, jobInfo.numRateClasses]);
   } else {
     process = spawn('bash', [scriptPath, hyphyDirectory, jobInfo.msaPath, jobInfo.geneticCode]);
   }
+
 
   // Send the stdout to the render window which can listen for 'stdout'.
   process.stdout.on('data', (data) => {
