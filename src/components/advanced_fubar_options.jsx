@@ -5,32 +5,88 @@ class AdvancedFubarOptions extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showAdvanced: false
-    }
+      showAdvanced: false,
+      message: null,
+      numGridPoints: 20,
+      numMCMCChains: 5,
+      chainLength: 2000000,//length_of_each_chain:
+      burnInSamples: 1000000,//number_of_burn_in_samples
+      samplesFromEachChain: 100,//number_of_samples
+      concDirichletPrior: 0.5
+    };
   }
 
-  componentWillMount() {
-    // Set the numRateClasses of the parent JobSubmittal component to 2 (the default) when ChooseAnalysisType mounts.
-    this.props.updateJobInfo('numRateClasses', 2)
+  componentDidMount() {
+    // Set the advanced fubar options of the parent JobSubmittal component to the defaults when AdvancedFubarOptions mounts.
+    this.props.updateJobInfo('numGridPoints', 20);
+    this.props.updateJobInfo('numMCMCChains', 5);
+    this.props.updateJobInfo('chainLength', 2000000);
+    this.props.updateJobInfo('burnInSamples', 1000000);
+    this.props.updateJobInfo('samplesFromEachChain', 100);
+    this.props.updateJobInfo('concDirichletPrior', 0.5);
   }
 
   handleChange = (event) => {
-    this.props.updateJobInfo('numRateClasses', event.target.value)
+    //this.props.updateJobInfo('numRateClasses', event.target.value)
+  }
+
+  toggleShow = () => {
+    var self = this;
+    var showAdvanced = !self.state.showAdvanced;
+    self.setState({
+      showAdvanced: showAdvanced
+    });
+  }
+
+  onLengthChange = (event) => {
+    var value = event.target.value;
+    if(value < 500000){
+      this.setState({message: "Please enter a length that is at least 500000."});
+    } else if (value > 50000000) {
+      this.setState({message: "Please enter a length that is no more than 50000000."});
+    } else {
+      this.setState({
+        length_of_each_chain: value,
+        message: null
+      });
+    }
+  }
+
+  onBurninChange = (event) => {
+    var value = event.target.value,
+      length = this.state.length_of_each_chain;
+    if(value < Math.ceil(.05*length)){
+      this.setState({message: "Please enter a burn in that is at least 5% of the chain length."});
+    } else if (value > Math.ceil(.95*length)) {
+      this.setState({message: "Please enter a burn in that is no more than 95% of the chain length."});
+    } else {
+      this.setState({
+        number_of_burn_in_samples: value,
+        message: null
+      });
+    }
+  }
+
+  onSampleChange = (event) => {
+    console.log('sampleChange');
+    var value = event.target.value;
+    if(value < 50){
+      this.setState({message: "Please enter an amount of samples to be drawn that is more than 50."});
+    } else if (value > this.state.length_of_each_chain-this.state.number_of_burn_in_samples) {
+      this.setState({message: "Please enter an amount of samples that is no more than the chain length minus the amount of burn in."});
+    } else {
+      this.setState({
+        number_of_samples: value,
+        message: null
+      });
+    }
   }
 
   render() {
     const self = this;
     return (
-      <div>Advanced Options Coming Soon</div>
-            );
-  }
-}
-
-module.exports.AdvancedFubarOptions = AdvancedFubarOptions;
-
-/*
- * Here's the code from datamonkey-js
-<div>
+      <div>
+        <div>NOTE: The advanced options are not yet functional. The default values are used for now.</div>
         <button
           className="btn"
           type="button"
@@ -90,7 +146,7 @@ module.exports.AdvancedFubarOptions = AdvancedFubarOptions;
                   className="form-control"
                   type="number"
                   step="10"
-                  value={this.state.number_of_samples}
+                  value={this.state.samplesFromEachChain}
                   onChange={this.onSampleChange}
                 />
               </div>
@@ -103,4 +159,8 @@ module.exports.AdvancedFubarOptions = AdvancedFubarOptions;
           </div>
         </div>
       </div>
-*/
+    );
+  }
+}
+
+module.exports.AdvancedFubarOptions = AdvancedFubarOptions;
