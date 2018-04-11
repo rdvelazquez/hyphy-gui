@@ -6,7 +6,7 @@ hyphy:
 	cd ./.hyphy && git checkout master && git pull && git checkout 2.3.10 && cmake . && make -j 4 HYPHYMP && cd ../
 
 yarn:
-	yarn
+	yarn install
 	webpack --config webpack.dev.js
 
 all: hyphy yarn
