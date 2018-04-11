@@ -121,7 +121,6 @@ class AdvancedFubarOptions extends Component {
     const self = this;
     return (
       <div>
-        <div>NOTE: The advanced options are not yet functional. The default values are used for now.</div>
         <button
           className="btn"
           type="button"

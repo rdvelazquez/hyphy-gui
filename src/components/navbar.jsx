@@ -43,13 +43,10 @@ class HyPhyGUINavBar extends Component {
                 <a className="dropdown-item" href="#" onClick={() => this.openNewJobSubmittalPage('busted')} >BUSTED</a>
                 <a className="dropdown-item" href="#" onClick={() => this.openNewJobSubmittalPage('fel')} >FEL</a>
                 <a className="dropdown-item" href="#" onClick={() => this.openNewJobSubmittalPage('fubar')} >FUBAR</a>
-                <a className="dropdown-item" href="#" onClick={() => this.openNewJobSubmittalPage('gard')} >GARD</a>
+                {/* <a className="dropdown-item" href="#" onClick={() => this.openNewJobSubmittalPage('gard')} >GARD</a> */}
                 <a className="dropdown-item" href="#" onClick={() => this.openNewJobSubmittalPage('meme')} >MEME</a>
                 <a className="dropdown-item" href="#" onClick={() => this.openNewJobSubmittalPage('relax')} >RELAX</a>
                 <a className="dropdown-item" href="#" onClick={() => this.openNewJobSubmittalPage('slac')} >SLAC</a>
-                <a className="dropdown-item" href="#">Other Methods to go Here</a>
-                <div className="dropdown-divider"></div>
-                <a className="dropdown-item" href="#">All Methods</a>
               </div>
             </li>
 
