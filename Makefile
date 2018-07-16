@@ -1,6 +1,9 @@
 .PHONY: clean all test publish
 
 hyphy:
+	echo "which versions of yarn and node are on travis?"
+	yarn --version
+	node --version
 	echo "installing hyphy"
 	@if ! test -d ./.hyphy; then git clone http://github.com/veg/hyphy.git ./.hyphy/; fi
 	@cd ./.hyphy && git checkout master && git pull && git checkout 2.3.10 && cmake . && make HYPHYMP && cd ../
