@@ -94,7 +94,7 @@ app.on("activate", function() {
  * =====================================================================================
  */
 
-// Move the msa file from it's original location to the .data folder.
+// Move the msa file from it's original location to the dataDirectory folder.
 ipcMain.on("moveMSA", function(event, arg) {
   fs.createReadStream(arg.msaPathOriginal).pipe(
     fs.createWriteStream(arg.msaPath)
@@ -196,5 +196,10 @@ function runAnalysisScript(jobInfo) {
   // Let the render window know when the analysis is done.
   process.on("close", code => {
     mainWindow.webContents.send("analysisComplete", { msg: jobInfo });
+  });
+
+  // Close the app on close (when message sent from render process)
+  ipcMain.on("closeApp", function(event, arg) {
+    app.quit();
   });
 }
